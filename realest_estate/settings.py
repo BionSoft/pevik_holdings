@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -89,17 +90,11 @@ WSGI_APPLICATION = 'realest_estate.wsgi.application'
 # a local_settings.py file on the server
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres.oexlfpwhkzezkufcmzfw',
-        'PASSWORD': 'brian@pevikdb',
-        'HOST': 'aws-0-sa-east-1.pooler.supabase.com',
-        'PORT': '5432',
-
-    },
-    # Define other databases if needed
+    'default': {}
 }
+
+database_url = os.environ.get("DATABASE_URL")
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
